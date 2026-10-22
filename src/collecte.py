@@ -35,13 +35,17 @@ subject = load_html("particuliers/vosdroits/N19806")
 
 sub_subject = extract_all_link(subject, "/particuliers/vosdroits/N",
                          'a[data-test="href-lien-dossier"]')
+print(sub_subject)
 
 
 # 2. Fiches de chaque sous-thème
 fiches = set()
 
 for n in sub_subject:
-    fiches = extract_all_link(load_html(n.lstrip("/")), "/particuliers/vosdroits/F")
+    print('je fais le test')
+    print(n)
+    fiches |=(extract_all_link(load_html(n.lstrip("/")),"/particuliers/vosdroits/F", 'a[data-test="href-lien-fiche"]'))
+    print(fiches)
 
 # 3. Téléchargement de toutes les fiches
 for f in sorted(fiches):
